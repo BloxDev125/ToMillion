@@ -4,11 +4,17 @@ let count = 0;
 async function fetchCount() {
   try {
     const response = await fetch('/count');
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
     const data = await response.json();
     count = data.count;
     updateCount();
   } catch (error) {
     console.error('Error fetching count:', error);
+    // Show an error message to the user
+    document.getElementById('message').innerText = 'Error fetching count. Please try again later.';
+    document.getElementById('message').style.color = 'red';
   }
 }
 
@@ -16,6 +22,9 @@ async function fetchCount() {
 async function increment() {
   try {
     const response = await fetch('/count/increment', { method: 'POST' });
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
     const data = await response.json();
     if (data.success) {
       count++;
@@ -23,11 +32,14 @@ async function increment() {
 
       if (count === 100000) {
         document.getElementById('message').innerText = "Congratulations! You've reached 100000!";
-        document.getElementById('message').style.color = "green";
+        document.getElementById('message').style.color = 'green';
       }
     }
   } catch (error) {
     console.error('Error incrementing count:', error);
+    // Show an error message to the user
+    document.getElementById('message').innerText = 'Error incrementing count. Please try again later.';
+    document.getElementById('message').style.color = 'red';
   }
 }
 
