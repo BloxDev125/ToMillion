@@ -1,5 +1,3 @@
-let count = 0;
-
 // Function to fetch the current count from the server
 async function fetchCount() {
   try {
@@ -8,7 +6,7 @@ async function fetchCount() {
       throw new Error('Network response was not ok');
     }
     const data = await response.json();
-    count = data.count;
+    count = data.count; // Update the client-side count with the value from the server
     updateCount();
   } catch (error) {
     console.error('Error fetching count:', error);
@@ -25,16 +23,7 @@ async function increment() {
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
-    const data = await response.json();
-    if (data.success) {
-      count++;
-      updateCount();
-
-      if (count === 100000) {
-        document.getElementById('message').innerText = "Congratulations! You've reached 100000!";
-        document.getElementById('message').style.color = 'green';
-      }
-    }
+    fetchCount(); // Fetch the updated count from the server
   } catch (error) {
     console.error('Error incrementing count:', error);
     // Show an error message to the user
