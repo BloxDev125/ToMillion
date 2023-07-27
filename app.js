@@ -31,7 +31,7 @@ app.get('/count', (req, res) => {
 
 app.post('/count/increment', (req, res) => {
   try {
-    count++;
+    count++; // Increment the count on the server
     saveCount();
     res.json({ success: true });
   } catch (error) {
