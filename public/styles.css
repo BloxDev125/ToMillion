@@ -44,6 +44,13 @@ button:hover {
     margin: 20px 0;
 }
 
+#tip {
+    font-size: 36px;
+    font-weight: bold;
+    color: #4CAF50;
+    margin: 20px 0;
+}
+
 #message {
     font-weight: bold;
     color: #4CAF50;
